@@ -67,13 +67,6 @@ SESSION_SECRET=your_secret_key
 
 ---
 
-## 📸 Screenshots
-| Home Page | Blog Page |
-|-----------|-----------|
-| ![Home Page](public/images/home_screenshot.png) | ![Blog Page](public/images/blog_screenshot.png) |
-
----
-
 ## 🤝 Contributing
 Contributions are welcome! Feel free to fork the repository, create a feature branch, and submit a pull request.  
 
