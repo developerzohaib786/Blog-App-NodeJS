@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include("./partials/head.ejs") %>
+    <title>Blog</title>
+</head>
+<style>
+    .special-input1{
+        width: 90%;
+    }
+    .usercontainer{
+        display: flex;
+        align-items: baseline;
+        justify-content: center;
+        gap: 10px;
+    }
+    .defaultimage{
+        border-radius: 500px;
+        height: 40px;
+    }
+    .coverImage{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    pre {
+    white-space: pre-wrap;  
+    word-wrap: break-word;  
+    overflow-wrap: break-word; 
+    max-width: 100%;  
+}
+
+</style>
+<body>
+    <%- include("./partials/nav.ejs") %>
+<div class="container mt-4">
+    <h1>  <%= blog.title %></h1>
+<div class="coverImage">
+    <img src="<%= blog.coverImageURL %>" alt="<%= blog.title %>" width="700px" height="400vh" class="coverImage"> 
+</div>
+<div class="blogpost mt-2">
+    <pre><%= blog.body %></pre> 
+</div>
+<div class="usercontainer">
+    <div class="mt-1">
+        <img class="defaultimage" src="<%= blog.createdBy.profileImageURL.startsWith('/') ? blog.createdBy.profileImageURL : '/images/default_user.png' %>" 
+        alt="<%= blog.createdBy.fullName %>'s photo">
+    </div>
+    <div>
+        <p><%= blog.createdBy.fullName %></p>
+    
+    </div>
+</div>
+</div>
+
+</div>
+</form>
+</div>
+<div class=" mt-2">
+<% if (locals.user) { %>
+    <form action="/blog/comment/<%= blog._id %>" method="post">
+        <div class="m-3  comment-container">
+            <h1>Comments (<%= comments.length %>)</h1>
+    
+            <input
+              type="text"
+              name="content"
+              id="exampleInputEmail1"
+              class="form-control mr-4"
+              aria-describedby="emailHelp"
+              placeholder="Enter your comment."
+            />
+          </div>
+          <button type="submit" class="btn btn-primary m-4">Submit</button>
+    
+    </form>
+</div>
+<% } %>
+
+<div class="m-3">
+    <% comments.forEach(comment=> { %>
+        
+            <img class="defaultimage" src="<%= comment.createdBy.profileImageURL.startsWith('/') ? comment.createdBy.profileImageURL : '/images/default_user.png' %>" 
+            alt="<%= comment.createdBy.fullName %>'s photo">
+        <pre><%= comment.content %></pre>
+    <% }) %>
+</div>
+<% if (!locals.user) { %>
+    <div class="usercontainer m-3">
+        <h2>Login to post the comments.</h2>
+    </div>
+<% } %>
+<%- include("./partials/scripts.ejs") %>
+</body>
+</html>
